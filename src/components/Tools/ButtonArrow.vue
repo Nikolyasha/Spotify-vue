@@ -12,8 +12,8 @@ const props = defineProps([
 
 <style scoped lang="scss">
 a{
-  height: 40px;
-  width: 40px;
+  height: 30px;
+  width: 30px;
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -22,8 +22,8 @@ a{
   background-color: rgba(0, 0, 0, 0.5);
   transition: all 0.2s ease-in-out;
   img{
-    width: 13.11px;
-    height: 22.5px;
+    width: 9px;
+    height: 15px;
   }
   &:hover{
     background-color: rgba(0, 0, 0, 1);

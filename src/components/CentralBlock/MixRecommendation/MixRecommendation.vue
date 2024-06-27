@@ -26,10 +26,12 @@ const props = defineProps(["title", "mixes"]);
     font-weight: 700;
   }
   .mixes{
-    margin-top: 26px;
+    margin: 26px -10px 0 -10px;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 31px;
+    justify-content: space-between;
+    justify-items: stretch;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px 10px;
   }
 }
 </style>

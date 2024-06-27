@@ -30,7 +30,6 @@ import Button from "@/components/Tools/Button.vue"
   position: fixed;
   max-width: 346px;
   height: 100vh;
-  background-color: #000000;
   padding: 20px 26px;
   color: #ccc;
   .header{

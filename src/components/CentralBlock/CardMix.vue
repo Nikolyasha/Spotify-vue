@@ -22,8 +22,8 @@ const props = defineProps([
 <style scoped lang="scss">
 .vertical{
   cursor: pointer;
-  background-color: rgba( 255, 255, 255, 0.04 );
-  padding: 20px 21px 18px 21px;
+  //background-color: rgba( 255, 255, 255, 0.04 );
+  padding: 10px 10px 18px 10px;
   border-radius: 8px;
   transition: background-color 0.2s ease-in-out;
   .mix-card__preview{
@@ -40,10 +40,13 @@ const props = defineProps([
   .mix-card__info{
     margin-top: 25px;
     .info-title{
+      width: 140px;
       font-weight: 700;
       font-size: 20px;
       white-space: nowrap;
       text-overflow: ellipsis;
+      overflow: hidden;
+      //border: 1px solid red;
     }
     .info-artists{
       margin-top: 8px;

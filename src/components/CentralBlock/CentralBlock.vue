@@ -5,11 +5,13 @@ import CardMix from "@/components/CentralBlock/CardMix.vue";
 import {useMixesStore} from "@/stores/mixes";
 import MixRecommendation from "@/components/CentralBlock/MixRecommendation/MixRecommendation.vue";
 import {ref} from "vue";
+import Button from "@/components/Tools/Button.vue";
 
 const mixesBank = useMixesStore()
+const isAuth = ref<boolean>(false)
 
 const welcomeMixes = mixesBank.recommended.slice(0,6)
-const yourTopMixes = mixesBank.recommended.slice(0,4)
+const yourTopMixes = mixesBank.recommended.slice(0,6)
 const mixesBlocks = ref([
   { title: 'Your top mixes' , mixes: yourTopMixes },
   { title: 'Made for you' , mixes: yourTopMixes },
@@ -22,14 +24,19 @@ const mixesBlocks = ref([
 
 <template>
   <div class="central-block">
-    <div class="linear"></div>
+    <div class="linear" v-if="isAuth"></div>
+    <div class="linear-gray" v-if="!isAuth"></div>
     <div class="header">
       <div class="buttons">
         <ButtonArrow :orientation="'left'"></ButtonArrow>
-        <ButtonArrow :orientation="'right'" style="margin-left: 22px"></ButtonArrow>
+        <ButtonArrow :orientation="'right'" style="margin-left: 10px"></ButtonArrow>
       </div>
-      <div class="profile">
+      <div class="profile" v-if="isAuth">
         <Profile :nickname="'Nikolyasha'"></Profile>
+      </div>
+      <div class="login-buttons">
+        <a href="" class="sign-up-button">Sign up</a>
+        <Button size="large" title="Log in"></Button>
       </div>
     </div>
     <div class="main-content">
@@ -59,9 +66,8 @@ const mixesBlocks = ref([
 
 <style scoped lang="scss">
 .central-block{
-  min-height: 100vh;
   width: 100%;
-  background-color: #121212;
+  //scroll-behavior: smooth;
   position: relative;
   .linear{
     top: 0;
@@ -71,17 +77,41 @@ const mixesBlocks = ref([
     height: 600px;
     background: linear-gradient(#3333A3, #121212);
   }
+  .linear-gray{
+    top: 0;
+    z-index: 0;
+    position: absolute;
+    width: 100%;
+    height: 300px;
+    background: linear-gradient(#282828, #121212);
+  }
   .header{
-    z-index: 1;
-    height: 80px;
+    height: 65px;
+    top: 0;
+    right: 0;
+    left: 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    position: relative;
-    padding: 0 41px;
+    padding: 0 20px;
+    background-color: #121212;
+    position: sticky;
+    z-index: 1000;
     .buttons{
       display: flex;
       z-index: 0;
+    }
+    .login-buttons{
+      .sign-up-button{
+        text-decoration: none;
+        color: #fff;
+        opacity: 0.7;
+        margin-right: 18px;
+        transition: opacity 0.2s ease-in-out;
+        &:hover{
+          opacity: 1;
+        }
+      }
     }
   }
   .main-content{

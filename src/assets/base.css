@@ -1,6 +1,8 @@
 @import "fonts.css";
 :root{
-  --main-font:"CircularStd"
+  --main-font:"CircularStd";
+
+  --color-hover: #232323;
 }
 *,
 *::before,
@@ -14,4 +16,9 @@ body {
   min-height: 100vh;
   font-family: var(--main-font), sans-serif;
   color: #fff;
+  background-color: #000000;
+}
+.block-element{
+  border-radius: 10px;
+  background-color: #121212;
 }

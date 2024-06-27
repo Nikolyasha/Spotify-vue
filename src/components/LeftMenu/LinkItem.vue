@@ -22,8 +22,8 @@ const props = defineProps([
   align-items: center;
   transition: all 0.2s ease-in-out;
   img{
-    width: 32px;
-    height: 32px;
+    width: 25px;
+    height: 25px;
   }
   span{
     margin-left: 20px;
