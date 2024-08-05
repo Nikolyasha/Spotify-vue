@@ -51,6 +51,9 @@ const footerLinks = ref<{title:string }[]>([
 <template>
   <div class="left-menu-wrapper">
     <div class="menu-main block-element">
+      <div class="menu-main__logo-full">
+        <img src="@/assets/images/logo/Spotify_Full_Logo_RGB_White.png" alt="">
+      </div>
       <div class="menu_item"
            v-for = "(link,index) in links.slice(0,2)"
            :key = "index">
@@ -110,6 +113,13 @@ const footerLinks = ref<{title:string }[]>([
       font-weight: 700;
       &:first-child{
         margin-top: 0;
+      }
+    }
+    &__logo-full{
+      height: 24px;
+      img{
+        height: 100%;
+        width: auto;
       }
     }
   }

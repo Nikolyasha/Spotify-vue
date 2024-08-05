@@ -22,11 +22,11 @@ const props = defineProps(["title", "mixes"]);
 <style scoped lang="scss">
 .mix-recommendation{
   h4{
-    font-size: 30px;
+    font-size: 24px;
     font-weight: 700;
   }
   .mixes{
-    margin: 26px -10px 0 -10px;
+    margin: 18px -10px 0 -10px;
     display: grid;
     justify-content: space-between;
     justify-items: stretch;

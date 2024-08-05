@@ -31,7 +31,7 @@ const isAuth = ref<boolean>(false);
 <style scoped lang="scss">
 .withoutAuth{
   display: grid;
-  grid-template-columns: 22% auto ;
+  grid-template-columns: 415px auto ;
   grid-template-rows: auto 1fr;
   gap: 8px;
   height: 100vh;

@@ -24,7 +24,7 @@ const props = defineProps([
   cursor: pointer;
   //background-color: rgba( 255, 255, 255, 0.04 );
   padding: 10px 10px 18px 10px;
-  border-radius: 8px;
+  border-radius: var(--border-radius-card);
   transition: background-color 0.2s ease-in-out;
   .mix-card__preview{
     border-radius: 4px;
@@ -61,7 +61,7 @@ const props = defineProps([
     }
   }
   &:hover{
-    background-color: rgba( 255, 255, 255, 0.06 );
+    background-color: var(--color-card-hover);
   }
 }
 .horizontal{
