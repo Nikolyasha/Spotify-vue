@@ -1,17 +1,47 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import MainLayout from '@/layouts/MainLayout.vue'
-import MainView from "@/views/MainView.vue"
+import WithoutLogin from '@/layouts/WithoutLogin.vue'
+import LoginView from '@/views/LoginView.vue'
+import SignUpView from '@/views/SignUpView.vue'
+import MainView from '@/views/MainView.vue'
+import CentralBlock from "@/views/CentralBlock/CentralBlock.vue";
+import UnauthorizedView from "@/views/CentralBlock/UnauthorizedView.vue";
+import ArtistView from "@/views/CentralBlock/ArtistView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      component: MainLayout,
+      component: WithoutLogin,
       children: [
         {
           path: '',
-          component: MainView
+          component: MainView,
+          children:[
+            {
+              path: '',
+              component: CentralBlock,
+              children:[
+                {
+                  path: '',
+                  component: UnauthorizedView,
+                },
+                {
+                  path: 'artist',
+                  component: ArtistView
+                }
+              ]
+            }
+          ]
+        },
+        {
+          path: '/login',
+          component: LoginView
+        },
+        {
+          path: '/signup',
+          component: SignUpView
         }
       ]
     }

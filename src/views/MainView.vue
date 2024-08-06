@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import LeftMenu from "@/components/LeftMenu/LeftMenu.vue"
 import RightMenu from "@/components/RightMenu/RightMenu.vue"
-import CentralBlock from "@/components/CentralBlock/CentralBlock.vue"
+import CentralBlock from "@/views/CentralBlock/CentralBlock.vue"
 import {ref} from "vue";
 import Button from "@/components/Tools/Button.vue";
 
@@ -13,7 +13,7 @@ const isAuth = ref<boolean>(false);
       <LeftMenu></LeftMenu>
     </div>
     <div class="central block-element">
-      <CentralBlock></CentralBlock>
+      <router-view></router-view>
     </div>
     <div class="bottom-info">
       <div class="bottom-info__text">
@@ -74,8 +74,9 @@ const isAuth = ref<boolean>(false);
 .wrapper{
   padding: 8px;
   .central{
-    overflow-y: scroll;
-    scrollbar-width: none;
+    border: 1px solid green;
+    overflow-y: hidden;
+    //scrollbar-width: none;
     overflow-x: hidden;
   }
 }

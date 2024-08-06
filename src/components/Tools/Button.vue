@@ -4,7 +4,8 @@ import {computed} from "vue";
 const props = defineProps([
     'title',
     'link',
-    'size'
+    'size',
+    'color'
 ])
 const padding = computed(() => {
   if (props.size  == 'large' ) return '12px 26px'
@@ -19,19 +20,36 @@ const fontSize = computed(() => {
 </script>
 
 <template>
-  <a href="" :style="'padding:'+padding">
-    <span :style="'font-size:'+fontSize">{{props.title}}</span>
-  </a>
+  <div :class="props.color === 'green' ? 'green-button link' : 'link' " :style="'padding:'+padding">
+    <router-link :to="props.link">
+      <span :style="'font-size:'+fontSize">{{props.title}}</span>
+    </router-link>
+  </div>
 </template>
 
 <style scoped lang="scss">
-a{
-  text-decoration: none;
+.link{
   background-color: #fff;
   border-radius: 40px;
-  span{
-    color: #171717;
-    font-weight: 700;
+  a{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    span{
+      color: #171717;
+      font-weight: 700;
+    }
+  }
+  &:hover{
+    cursor: pointer;
+  }
+}
+.green-button{
+  background-color: var(--background-base);
+  transition: background-color 0.1s ease-in-out;
+  &:hover{
+    background-color: var(--background-highlight);
   }
 }
 </style>

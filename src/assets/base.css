@@ -8,6 +8,19 @@
   --color-card-hover: rgba( 255, 255, 255, 0.06 );
 
   --border-radius-card: 8px;
+
+  --background-base: #1ed760;
+  --background-highlight: #1fdf64;
+  --background-press: #169c46;
+  --background-elevated-base: #1fdf64;
+  --background-elevated-highlight: #1fdf64;
+  --background-elevated-press: #169c46;
+  --background-tinted-base: #1ed760;
+  --background-tinted-highlight: #1ed760;
+  --background-tinted-press: #1ed760;
+  --background-unsafe-for-small-text-base:#1ed760;
+  --background-unsafe-for-small-text-highlight: #1ed760;
+  --background-unsafe-for-small-text-press: #1ed760;
 }
 *,
 *::before,
