@@ -22,48 +22,46 @@ const mixesBlocks = ref([
 </script>
 <template>
   <div class="main-content">
-    <div class="popular-artists">
-      <h4 class="popular-artists__title">Popular artists</h4>
-      <div class="popular-artists__content">
-        <artist v-for="(artist,index) in popularArtists"
-                :key="index"
-                :nickname="artist.nickname"
-                :avatar="artist.avatar" style="width: 16.66%">
-        </artist>
+    <div class="main-content__wrapper">
+      <div class="popular-artists">
+        <h4 class="popular-artists__title">Popular artists</h4>
+        <div class="popular-artists__content">
+          <artist v-for="(artist,index) in popularArtists"
+                  :key="index"
+                  :nickname="artist.nickname"
+                  :avatar="artist.avatar" style="width: 16.66%">
+          </artist>
+        </div>
       </div>
-    </div>
-    <!--      <div class="welcome">-->
-    <!--        <h4 class="welcome-title">-->
-    <!--          Good afternoon-->
-    <!--        </h4>-->
-    <!--        <div class="welcome-mixes">-->
-    <!--          <div class="welcome-mixes__item"-->
-    <!--               v-for="(mix,index) in welcomeMixes"-->
-    <!--               :key="index">-->
-    <!--            <CardMix-->
-    <!--                :title="mix.title"-->
-    <!--                :preview="mix.preview"-->
-    <!--                :type="'horizontal'"></CardMix>-->
-    <!--          </div>-->
-    <!--        </div>-->
-    <!--      </div>-->
-    <div class="your-top-mixes recommendation-mixes"
-         v-for = "(mixes,index) in mixesBlocks "
-         :key = "index">
-      <MixRecommendation :title="mixes.title" :mixes="yourTopMixes"></MixRecommendation>
+      <!--      <div class="welcome">-->
+      <!--        <h4 class="welcome-title">-->
+      <!--          Good afternoon-->
+      <!--        </h4>-->
+      <!--        <div class="welcome-mixes">-->
+      <!--          <div class="welcome-mixes__item"-->
+      <!--               v-for="(mix,index) in welcomeMixes"-->
+      <!--               :key="index">-->
+      <!--            <CardMix-->
+      <!--                :title="mix.title"-->
+      <!--                :preview="mix.preview"-->
+      <!--                :type="'horizontal'"></CardMix>-->
+      <!--          </div>-->
+      <!--        </div>-->
+      <!--      </div>-->
+      <div class="your-top-mixes recommendation-mixes"
+           v-for = "(mixes,index) in mixesBlocks "
+           :key = "index">
+        <MixRecommendation :title="mixes.title" :mixes="yourTopMixes"></MixRecommendation>
+      </div>
     </div>
   </div>
 </template>
 <style lang="scss" scoped>
 .main-content{
-  box-sizing: content-box;
-  height: calc(100vh - 16px - 75px);;
-  padding: 30px 24px;
   position: relative;
-  min-height: 100vh;
-  overflow-y: scroll;
-  border: 1px solid red;
-  z-index: 1;
+  &__wrapper{
+    padding: 94px 24px 30px 24px;
+  }
   p{
     z-index: 100;
     height: 1000px;

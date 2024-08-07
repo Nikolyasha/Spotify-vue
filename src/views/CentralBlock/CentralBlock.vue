@@ -4,15 +4,30 @@ import Profile from "@/components/CentralBlock/Profile.vue";
 import CardMix from "@/components/CentralBlock/CardMix.vue";
 import {useMixesStore} from "@/stores/mixes";
 import MixRecommendation from "@/components/CentralBlock/MixRecommendation/MixRecommendation.vue";
-import {ref} from "vue";
+import {onUpdated, ref} from "vue";
 import Button from "@/components/Tools/Button.vue";
 import {useArtistsStore} from "@/stores/artists";
 import Artist from "@/components/CentralBlock/Artist.vue";
-
-
 const isAuth = ref<boolean>(false)
+const isTransparentHeader = ref<boolean>(false)
+const header = ref()
+const content = ref()
 
+function isScroll(){
+  if (content.value.scrollTop >= 96) {
+    header.value.style.background="#121212";
+  }
+  if (content.value.scrollTop === 0 && !isTransparentHeader.value) {
+    header.value.style.background="rgba(0,0,0,.5)";
+  }else if (content.value.scrollTop === 0 && isTransparentHeader.value){
+    header.value.style.background="transparent";
+  }
 
+}
+function isTrans(value:boolean){
+  isTransparentHeader.value = value
+  isTransparentHeader.value == value ? header.value.style.background="transparent" : ''
+}
 
 </script>
 
@@ -20,7 +35,7 @@ const isAuth = ref<boolean>(false)
   <div class="central-block">
     <div class="linear" v-if="isAuth"></div>
     <div class="linear-gray" v-if="!isAuth"></div>
-    <div class="header">
+    <div class="header" ref="header" >
       <div class="buttons">
         <ButtonArrow :orientation="'left'"></ButtonArrow>
         <ButtonArrow :orientation="'right'" style="margin-left: 10px"></ButtonArrow>
@@ -33,13 +48,18 @@ const isAuth = ref<boolean>(false)
         <Button size="large" title="Log in" link="/login"></Button>
       </div>
     </div>
-    <router-view></router-view>
+    <div class="main-content"  >
+      <div class="main-content__wrapper" @scroll="isScroll" ref="content">
+        <router-view @is-transparent-header="isTrans"></router-view>
+      </div>
+    </div>
   </div>
 </template>
 
 <style scoped lang="scss">
 .central-block{
   width: 100%;
+  height: 100%;
   //scroll-behavior: smooth;
   position: relative;
   .linear{
@@ -67,9 +87,10 @@ const isAuth = ref<boolean>(false)
     align-items: center;
     justify-content: space-between;
     padding: 0 20px;
-    background-color: #121212;
+    background-color: rgba(0,0,0,.5);
     position: absolute;
     z-index: 1000;
+    transition: background-color 0.4s ease;
     .buttons{
       display: flex;
       z-index: 0;
@@ -89,8 +110,14 @@ const isAuth = ref<boolean>(false)
       }
     }
   }
-
+  .main-content{
+    height: 100%;
+    &__wrapper{
+      height: 100%;
+      overflow-y: scroll;
+      scrollbar-width: none;
+    }
+  }
 
 }
-
 </style>

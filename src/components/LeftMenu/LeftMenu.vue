@@ -104,6 +104,8 @@ const footerLinks = ref<{title:string }[]>([
   height: 100%;
   display: grid;
   grid-template-rows: auto 1fr;
+  overflow-y: scroll;
+  scrollbar-width: none;
   .menu-main{
     padding: 20px 25px;
     margin-bottom: 9px;

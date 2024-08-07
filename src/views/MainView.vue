@@ -32,11 +32,16 @@ const isAuth = ref<boolean>(false);
 .withoutAuth{
   display: grid;
   grid-template-columns: 415px auto ;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: calc(100vh - 16px - 75px) 1fr;
   gap: 8px;
   height: 100vh;
   .central{
-    height: calc(100vh - 16px - 75px);
+    overflow: hidden;
+    border-radius: 10px;
+  }
+  .left-side{
+    overflow: hidden;
+    border-radius: 10px;
   }
   .bottom-info{
     display: flex;
@@ -74,10 +79,6 @@ const isAuth = ref<boolean>(false);
 .wrapper{
   padding: 8px;
   .central{
-    border: 1px solid green;
-    overflow-y: hidden;
-    //scrollbar-width: none;
-    overflow-x: hidden;
   }
 }
 </style>

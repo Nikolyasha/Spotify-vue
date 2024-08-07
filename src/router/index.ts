@@ -26,6 +26,7 @@ const router = createRouter({
                 {
                   path: '',
                   component: UnauthorizedView,
+                  props: true
                 },
                 {
                   path: 'artist',
