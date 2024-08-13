@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 
-import {onMounted} from "vue";
+import {onMounted, ref} from "vue";
+import Button from "@/components/Tools/Button.vue";
 
 const emit = defineEmits<{
   (e: 'is-transparent-header', value: boolean): void;
@@ -8,6 +9,10 @@ const emit = defineEmits<{
 onMounted(() => {
   emit('is-transparent-header',true)
 })
+const popularSongs = ref()
+const showMoreSongs = () => {
+  popularSongs.value.classList.toggle('full-width__popular-songs')
+}
 </script>
 <template>
   <div class="block-artist">
@@ -58,14 +63,272 @@ onMounted(() => {
       <h3 class="block-artist__popular-songs__title">
         Popular
       </h3>
-      <div class="block-artist__popular-songs__list">
+      <div class="block-artist__popular-songs__list" ref="popularSongs">
         <div class="block-artist__popular-songs__list-item">
-          <p>1</p>
-          <div><img src="@/assets/images/central/mixes/Daily-mix-1.png" alt=""></div>
-          <p>Enjoy the Silence</p>
-          <p> 687,296,370 </p>
-          <p>4:14</p>
+          <div class="block-artist__popular-songs__list-item__number">
+            <p>1</p>
+            <button>
+              <svg data-encore-id="icon" role="img" aria-hidden="true" class="Svg-sc-ytk21e-0 bneLcE zOsKPnD_9x3KJqQCSmAq" viewBox="0 0 24 24"><path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path></svg>
+            </button>
+          </div>
+          <div class="block-artist__popular-songs__list-item__song">
+            <div class="wrapper-image"><img src="@/assets/images/central/mixes/Daily-mix-1.png" alt=""></div>
+            <p>Enjoy the Silence</p>
+          </div>
+          <div class="block-artist__popular-songs__list-item__listens">
+            <p> 687,296,370 </p>
+          </div>
+          <div class="block-artist__popular-songs__list-item__time">
+            <button class="button-like">
+              <svg data-encore-id="icon" role="img" aria-hidden="true" viewBox="0 0 16 16" class="Svg-sc-ytk21e-0 dYnaPI"><path d="M1.69 2A4.582 4.582 0 0 1 8 2.023 4.583 4.583 0 0 1 11.88.817h.002a4.618 4.618 0 0 1 3.782 3.65v.003a4.543 4.543 0 0 1-1.011 3.84L9.35 14.629a1.765 1.765 0 0 1-2.093.464 1.762 1.762 0 0 1-.605-.463L1.348 8.309A4.582 4.582 0 0 1 1.689 2zm3.158.252A3.082 3.082 0 0 0 2.49 7.337l.005.005L7.8 13.664a.264.264 0 0 0 .311.069.262.262 0 0 0 .09-.069l5.312-6.33a3.043 3.043 0 0 0 .68-2.573 3.118 3.118 0 0 0-2.551-2.463 3.079 3.079 0 0 0-2.612.816l-.007.007a1.501 1.501 0 0 1-2.045 0l-.009-.008a3.082 3.082 0 0 0-2.121-.861z"></path></svg>
+            </button>
+            <p>4:14</p>
+            <button class="button-more">
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+          </div>
         </div>
+        <div class="block-artist__popular-songs__list-item">
+          <div class="block-artist__popular-songs__list-item__number">
+            <p>2</p>
+            <button>
+              <svg data-encore-id="icon" role="img" aria-hidden="true" class="Svg-sc-ytk21e-0 bneLcE zOsKPnD_9x3KJqQCSmAq" viewBox="0 0 24 24"><path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path></svg>
+            </button>
+          </div>
+          <div class="block-artist__popular-songs__list-item__song">
+            <div class="wrapper-image"><img src="@/assets/images/central/mixes/Daily-mix-5.png" alt=""></div>
+            <p>Just Can`t Get Enough</p>
+          </div>
+          <div class="block-artist__popular-songs__list-item__listens">
+            <p> 426,134,638 </p>
+          </div>
+          <div class="block-artist__popular-songs__list-item__time">
+            <button class="button-like">
+              <svg data-encore-id="icon" role="img" aria-hidden="true" viewBox="0 0 16 16" class="Svg-sc-ytk21e-0 dYnaPI"><path d="M1.69 2A4.582 4.582 0 0 1 8 2.023 4.583 4.583 0 0 1 11.88.817h.002a4.618 4.618 0 0 1 3.782 3.65v.003a4.543 4.543 0 0 1-1.011 3.84L9.35 14.629a1.765 1.765 0 0 1-2.093.464 1.762 1.762 0 0 1-.605-.463L1.348 8.309A4.582 4.582 0 0 1 1.689 2zm3.158.252A3.082 3.082 0 0 0 2.49 7.337l.005.005L7.8 13.664a.264.264 0 0 0 .311.069.262.262 0 0 0 .09-.069l5.312-6.33a3.043 3.043 0 0 0 .68-2.573 3.118 3.118 0 0 0-2.551-2.463 3.079 3.079 0 0 0-2.612.816l-.007.007a1.501 1.501 0 0 1-2.045 0l-.009-.008a3.082 3.082 0 0 0-2.121-.861z"></path></svg>
+            </button>
+            <p>3:40</p>
+            <button class="button-more">
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+          </div>
+        </div>
+        <div class="block-artist__popular-songs__list-item">
+          <div class="block-artist__popular-songs__list-item__number">
+            <p>3</p>
+            <button>
+              <svg data-encore-id="icon" role="img" aria-hidden="true" class="Svg-sc-ytk21e-0 bneLcE zOsKPnD_9x3KJqQCSmAq" viewBox="0 0 24 24"><path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path></svg>
+            </button>
+          </div>
+          <div class="block-artist__popular-songs__list-item__song">
+            <div class="wrapper-image"><img src="@/assets/images/central/mixes/Daily-mix-1.png" alt=""></div>
+            <p>Enjoy the Silence</p>
+          </div>
+          <div class="block-artist__popular-songs__list-item__listens">
+            <p> 687,296,370 </p>
+          </div>
+          <div class="block-artist__popular-songs__list-item__time">
+            <button class="button-like">
+              <svg data-encore-id="icon" role="img" aria-hidden="true" viewBox="0 0 16 16" class="Svg-sc-ytk21e-0 dYnaPI"><path d="M1.69 2A4.582 4.582 0 0 1 8 2.023 4.583 4.583 0 0 1 11.88.817h.002a4.618 4.618 0 0 1 3.782 3.65v.003a4.543 4.543 0 0 1-1.011 3.84L9.35 14.629a1.765 1.765 0 0 1-2.093.464 1.762 1.762 0 0 1-.605-.463L1.348 8.309A4.582 4.582 0 0 1 1.689 2zm3.158.252A3.082 3.082 0 0 0 2.49 7.337l.005.005L7.8 13.664a.264.264 0 0 0 .311.069.262.262 0 0 0 .09-.069l5.312-6.33a3.043 3.043 0 0 0 .68-2.573 3.118 3.118 0 0 0-2.551-2.463 3.079 3.079 0 0 0-2.612.816l-.007.007a1.501 1.501 0 0 1-2.045 0l-.009-.008a3.082 3.082 0 0 0-2.121-.861z"></path></svg>
+            </button>
+            <p>4:14</p>
+            <button class="button-more">
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+          </div>
+        </div>
+        <div class="block-artist__popular-songs__list-item">
+          <div class="block-artist__popular-songs__list-item__number">
+            <p>4</p>
+            <button>
+              <svg data-encore-id="icon" role="img" aria-hidden="true" class="Svg-sc-ytk21e-0 bneLcE zOsKPnD_9x3KJqQCSmAq" viewBox="0 0 24 24"><path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path></svg>
+            </button>
+          </div>
+          <div class="block-artist__popular-songs__list-item__song">
+            <div class="wrapper-image"><img src="@/assets/images/central/mixes/Daily-mix-1.png" alt=""></div>
+            <p>Enjoy the Silence</p>
+          </div>
+          <div class="block-artist__popular-songs__list-item__listens">
+            <p> 687,296,370 </p>
+          </div>
+          <div class="block-artist__popular-songs__list-item__time">
+            <button class="button-like">
+              <svg data-encore-id="icon" role="img" aria-hidden="true" viewBox="0 0 16 16" class="Svg-sc-ytk21e-0 dYnaPI"><path d="M1.69 2A4.582 4.582 0 0 1 8 2.023 4.583 4.583 0 0 1 11.88.817h.002a4.618 4.618 0 0 1 3.782 3.65v.003a4.543 4.543 0 0 1-1.011 3.84L9.35 14.629a1.765 1.765 0 0 1-2.093.464 1.762 1.762 0 0 1-.605-.463L1.348 8.309A4.582 4.582 0 0 1 1.689 2zm3.158.252A3.082 3.082 0 0 0 2.49 7.337l.005.005L7.8 13.664a.264.264 0 0 0 .311.069.262.262 0 0 0 .09-.069l5.312-6.33a3.043 3.043 0 0 0 .68-2.573 3.118 3.118 0 0 0-2.551-2.463 3.079 3.079 0 0 0-2.612.816l-.007.007a1.501 1.501 0 0 1-2.045 0l-.009-.008a3.082 3.082 0 0 0-2.121-.861z"></path></svg>
+            </button>
+            <p>4:14</p>
+            <button class="button-more">
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+          </div>
+        </div>
+        <div class="block-artist__popular-songs__list-item">
+          <div class="block-artist__popular-songs__list-item__number">
+            <p>5</p>
+            <button>
+              <svg data-encore-id="icon" role="img" aria-hidden="true" class="Svg-sc-ytk21e-0 bneLcE zOsKPnD_9x3KJqQCSmAq" viewBox="0 0 24 24"><path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path></svg>
+            </button>
+          </div>
+          <div class="block-artist__popular-songs__list-item__song">
+            <div class="wrapper-image"><img src="@/assets/images/central/mixes/Daily-mix-1.png" alt=""></div>
+            <p>Enjoy the Silence</p>
+          </div>
+          <div class="block-artist__popular-songs__list-item__listens">
+            <p> 687,296,370 </p>
+          </div>
+          <div class="block-artist__popular-songs__list-item__time">
+            <button class="button-like">
+              <svg data-encore-id="icon" role="img" aria-hidden="true" viewBox="0 0 16 16" class="Svg-sc-ytk21e-0 dYnaPI"><path d="M1.69 2A4.582 4.582 0 0 1 8 2.023 4.583 4.583 0 0 1 11.88.817h.002a4.618 4.618 0 0 1 3.782 3.65v.003a4.543 4.543 0 0 1-1.011 3.84L9.35 14.629a1.765 1.765 0 0 1-2.093.464 1.762 1.762 0 0 1-.605-.463L1.348 8.309A4.582 4.582 0 0 1 1.689 2zm3.158.252A3.082 3.082 0 0 0 2.49 7.337l.005.005L7.8 13.664a.264.264 0 0 0 .311.069.262.262 0 0 0 .09-.069l5.312-6.33a3.043 3.043 0 0 0 .68-2.573 3.118 3.118 0 0 0-2.551-2.463 3.079 3.079 0 0 0-2.612.816l-.007.007a1.501 1.501 0 0 1-2.045 0l-.009-.008a3.082 3.082 0 0 0-2.121-.861z"></path></svg>
+            </button>
+            <p>4:14</p>
+            <button class="button-more">
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+          </div>
+        </div>
+        <div class="block-artist__popular-songs__list-item">
+          <div class="block-artist__popular-songs__list-item__number">
+            <p>6</p>
+            <button>
+              <svg data-encore-id="icon" role="img" aria-hidden="true" class="Svg-sc-ytk21e-0 bneLcE zOsKPnD_9x3KJqQCSmAq" viewBox="0 0 24 24"><path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path></svg>
+            </button>
+          </div>
+          <div class="block-artist__popular-songs__list-item__song">
+            <div class="wrapper-image"><img src="@/assets/images/central/mixes/Daily-mix-1.png" alt=""></div>
+            <p>Enjoy the Silence</p>
+          </div>
+          <div class="block-artist__popular-songs__list-item__listens">
+            <p> 687,296,370 </p>
+          </div>
+          <div class="block-artist__popular-songs__list-item__time">
+            <button class="button-like">
+              <svg data-encore-id="icon" role="img" aria-hidden="true" viewBox="0 0 16 16" class="Svg-sc-ytk21e-0 dYnaPI"><path d="M1.69 2A4.582 4.582 0 0 1 8 2.023 4.583 4.583 0 0 1 11.88.817h.002a4.618 4.618 0 0 1 3.782 3.65v.003a4.543 4.543 0 0 1-1.011 3.84L9.35 14.629a1.765 1.765 0 0 1-2.093.464 1.762 1.762 0 0 1-.605-.463L1.348 8.309A4.582 4.582 0 0 1 1.689 2zm3.158.252A3.082 3.082 0 0 0 2.49 7.337l.005.005L7.8 13.664a.264.264 0 0 0 .311.069.262.262 0 0 0 .09-.069l5.312-6.33a3.043 3.043 0 0 0 .68-2.573 3.118 3.118 0 0 0-2.551-2.463 3.079 3.079 0 0 0-2.612.816l-.007.007a1.501 1.501 0 0 1-2.045 0l-.009-.008a3.082 3.082 0 0 0-2.121-.861z"></path></svg>
+            </button>
+            <p>4:14</p>
+            <button class="button-more">
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+          </div>
+        </div>
+        <div class="block-artist__popular-songs__list-item">
+          <div class="block-artist__popular-songs__list-item__number">
+            <p>7</p>
+            <button>
+              <svg data-encore-id="icon" role="img" aria-hidden="true" class="Svg-sc-ytk21e-0 bneLcE zOsKPnD_9x3KJqQCSmAq" viewBox="0 0 24 24"><path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path></svg>
+            </button>
+          </div>
+          <div class="block-artist__popular-songs__list-item__song">
+            <div class="wrapper-image"><img src="@/assets/images/central/mixes/Daily-mix-1.png" alt=""></div>
+            <p>Enjoy the Silence</p>
+          </div>
+          <div class="block-artist__popular-songs__list-item__listens">
+            <p> 687,296,370 </p>
+          </div>
+          <div class="block-artist__popular-songs__list-item__time">
+            <button class="button-like">
+              <svg data-encore-id="icon" role="img" aria-hidden="true" viewBox="0 0 16 16" class="Svg-sc-ytk21e-0 dYnaPI"><path d="M1.69 2A4.582 4.582 0 0 1 8 2.023 4.583 4.583 0 0 1 11.88.817h.002a4.618 4.618 0 0 1 3.782 3.65v.003a4.543 4.543 0 0 1-1.011 3.84L9.35 14.629a1.765 1.765 0 0 1-2.093.464 1.762 1.762 0 0 1-.605-.463L1.348 8.309A4.582 4.582 0 0 1 1.689 2zm3.158.252A3.082 3.082 0 0 0 2.49 7.337l.005.005L7.8 13.664a.264.264 0 0 0 .311.069.262.262 0 0 0 .09-.069l5.312-6.33a3.043 3.043 0 0 0 .68-2.573 3.118 3.118 0 0 0-2.551-2.463 3.079 3.079 0 0 0-2.612.816l-.007.007a1.501 1.501 0 0 1-2.045 0l-.009-.008a3.082 3.082 0 0 0-2.121-.861z"></path></svg>
+            </button>
+            <p>4:14</p>
+            <button class="button-more">
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+          </div>
+        </div>
+        <div class="block-artist__popular-songs__list-item">
+          <div class="block-artist__popular-songs__list-item__number">
+            <p>8</p>
+            <button>
+              <svg data-encore-id="icon" role="img" aria-hidden="true" class="Svg-sc-ytk21e-0 bneLcE zOsKPnD_9x3KJqQCSmAq" viewBox="0 0 24 24"><path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path></svg>
+            </button>
+          </div>
+          <div class="block-artist__popular-songs__list-item__song">
+            <div class="wrapper-image"><img src="@/assets/images/central/mixes/Daily-mix-1.png" alt=""></div>
+            <p>Enjoy the Silence</p>
+          </div>
+          <div class="block-artist__popular-songs__list-item__listens">
+            <p> 687,296,370 </p>
+          </div>
+          <div class="block-artist__popular-songs__list-item__time">
+            <button class="button-like">
+              <svg data-encore-id="icon" role="img" aria-hidden="true" viewBox="0 0 16 16" class="Svg-sc-ytk21e-0 dYnaPI"><path d="M1.69 2A4.582 4.582 0 0 1 8 2.023 4.583 4.583 0 0 1 11.88.817h.002a4.618 4.618 0 0 1 3.782 3.65v.003a4.543 4.543 0 0 1-1.011 3.84L9.35 14.629a1.765 1.765 0 0 1-2.093.464 1.762 1.762 0 0 1-.605-.463L1.348 8.309A4.582 4.582 0 0 1 1.689 2zm3.158.252A3.082 3.082 0 0 0 2.49 7.337l.005.005L7.8 13.664a.264.264 0 0 0 .311.069.262.262 0 0 0 .09-.069l5.312-6.33a3.043 3.043 0 0 0 .68-2.573 3.118 3.118 0 0 0-2.551-2.463 3.079 3.079 0 0 0-2.612.816l-.007.007a1.501 1.501 0 0 1-2.045 0l-.009-.008a3.082 3.082 0 0 0-2.121-.861z"></path></svg>
+            </button>
+            <p>4:14</p>
+            <button class="button-more">
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+          </div>
+        </div>
+        <div class="block-artist__popular-songs__list-item">
+          <div class="block-artist__popular-songs__list-item__number">
+            <p>9</p>
+            <button>
+              <svg data-encore-id="icon" role="img" aria-hidden="true" class="Svg-sc-ytk21e-0 bneLcE zOsKPnD_9x3KJqQCSmAq" viewBox="0 0 24 24"><path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path></svg>
+            </button>
+          </div>
+          <div class="block-artist__popular-songs__list-item__song">
+            <div class="wrapper-image"><img src="@/assets/images/central/mixes/Daily-mix-1.png" alt=""></div>
+            <p>Enjoy the Silence</p>
+          </div>
+          <div class="block-artist__popular-songs__list-item__listens">
+            <p> 687,296,370 </p>
+          </div>
+          <div class="block-artist__popular-songs__list-item__time">
+            <button class="button-like">
+              <svg data-encore-id="icon" role="img" aria-hidden="true" viewBox="0 0 16 16" class="Svg-sc-ytk21e-0 dYnaPI"><path d="M1.69 2A4.582 4.582 0 0 1 8 2.023 4.583 4.583 0 0 1 11.88.817h.002a4.618 4.618 0 0 1 3.782 3.65v.003a4.543 4.543 0 0 1-1.011 3.84L9.35 14.629a1.765 1.765 0 0 1-2.093.464 1.762 1.762 0 0 1-.605-.463L1.348 8.309A4.582 4.582 0 0 1 1.689 2zm3.158.252A3.082 3.082 0 0 0 2.49 7.337l.005.005L7.8 13.664a.264.264 0 0 0 .311.069.262.262 0 0 0 .09-.069l5.312-6.33a3.043 3.043 0 0 0 .68-2.573 3.118 3.118 0 0 0-2.551-2.463 3.079 3.079 0 0 0-2.612.816l-.007.007a1.501 1.501 0 0 1-2.045 0l-.009-.008a3.082 3.082 0 0 0-2.121-.861z"></path></svg>
+            </button>
+            <p>4:14</p>
+            <button class="button-more">
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+          </div>
+        </div>
+        <div class="block-artist__popular-songs__list-item">
+          <div class="block-artist__popular-songs__list-item__number">
+            <p>10</p>
+            <button>
+              <svg data-encore-id="icon" role="img" aria-hidden="true" class="Svg-sc-ytk21e-0 bneLcE zOsKPnD_9x3KJqQCSmAq" viewBox="0 0 24 24"><path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path></svg>
+            </button>
+          </div>
+          <div class="block-artist__popular-songs__list-item__song">
+            <div class="wrapper-image"><img src="@/assets/images/central/mixes/Daily-mix-1.png" alt=""></div>
+            <p>Enjoy the Silence</p>
+          </div>
+          <div class="block-artist__popular-songs__list-item__listens">
+            <p> 687,296,370 </p>
+          </div>
+          <div class="block-artist__popular-songs__list-item__time">
+            <button class="button-like">
+              <svg data-encore-id="icon" role="img" aria-hidden="true" viewBox="0 0 16 16" class="Svg-sc-ytk21e-0 dYnaPI"><path d="M1.69 2A4.582 4.582 0 0 1 8 2.023 4.583 4.583 0 0 1 11.88.817h.002a4.618 4.618 0 0 1 3.782 3.65v.003a4.543 4.543 0 0 1-1.011 3.84L9.35 14.629a1.765 1.765 0 0 1-2.093.464 1.762 1.762 0 0 1-.605-.463L1.348 8.309A4.582 4.582 0 0 1 1.689 2zm3.158.252A3.082 3.082 0 0 0 2.49 7.337l.005.005L7.8 13.664a.264.264 0 0 0 .311.069.262.262 0 0 0 .09-.069l5.312-6.33a3.043 3.043 0 0 0 .68-2.573 3.118 3.118 0 0 0-2.551-2.463 3.079 3.079 0 0 0-2.612.816l-.007.007a1.501 1.501 0 0 1-2.045 0l-.009-.008a3.082 3.082 0 0 0-2.121-.861z"></path></svg>
+            </button>
+            <p>4:14</p>
+            <button class="button-more">
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="block-artist__popular-songs__button-more">
+        <button @click="showMoreSongs">
+          See more
+        </button>
       </div>
     </div>
   </div>
@@ -190,14 +453,154 @@ onMounted(() => {
       margin-bottom: 16px;
     }
     &__list{
+      height: 280px;
+      overflow: hidden;
+      transition: height 0.2s ease-in-out;
       &-item{
+        border-radius: 4px;
+        height: 56px;
         display: grid;
-        width: fit-content;
+        grid-template-columns: [index] var(--tracklist-index-column-width,16px) [first] minmax(120px,var(--col1,4fr)) [var1] minmax(120px,var(--col2,2fr)) [last] minmax(120px,var(--col3,1fr));
+        width: 80%;
         align-items: center;
-        grid-template-columns: auto auto auto auto auto auto auto;
-        width: 100%;
+        grid-gap: 16px;
+        padding: 0 16px;
+        &__number{
+          position: relative;
+          p{
+            font-variant: tabular-nums;
+            font-size: 1rem;
+            color: #fff;
+            opacity: 0.7;
+          }
+          button{
+            background-color: transparent;
+            border: none;
+            width: 16px;
+            height: 16px;
+            padding: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+            opacity: 0;
+            svg{
+              width: 16px;
+              height: 16px;
+              fill: white;
+            }
+          }
+        }
+        &__song{
+          height: 100%;
+          display: flex;
+          align-items: center;
+          user-select: none;
+          p{
+            cursor: pointer;
+            &:hover{
+              text-decoration: underline;
+            }
+          }
+          .wrapper-image{
+            margin-right: 12px;
+            display: flex;
+            border-radius: 4px;
+            overflow: hidden;
+            img{
+              height: 40px;
+              width: 40px;
+            }
+          }
+        }
+        &__listens , &__time p{
+          font-size: 0.875rem;
+          font-variant-numeric: tabular-nums;
+          color: #fff;
+          opacity: 0.7;
+          user-select: none;
+        }
+        &__time{
+          display: flex;
+          width: 100%;
+          justify-content: end;
+          align-items: center;
+          p{
+            margin: 0 12px;
+          }
+          button{
+            background-color: transparent;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+          }
+          .button-more{
+            display: flex;
+            width: 16px;
+            height: 32px;
+            justify-content: space-between;
+            align-items: center;
+            opacity: 0;
+            span{
+              height: 3px;
+              width: 3px;
+              background-color: white;
+              border-radius: 9999px;
+            }
+            &:hover{
+              opacity: 1 !important;
+            }
+          }
+          .button-like{
+            width: 16px;
+            height: 16px;
+            margin-right: 12px;
+            opacity: 0;
+            svg{
+              width: 16px;
+              height: 16px;
+              fill: #fff;
+            }
+            &:hover{
+              opacity: 1 !important;
+            }
+          }
+        }
+        &:hover{
+          background-color: rgba(255, 255, 255, 0.1);
+        }
+        &:hover &__number button{
+          opacity: 1;
+        }
+        &:hover &__number p{
+          opacity: 0;
+        }
+        &:hover &__listens{
+          opacity: 1;
+        }
+        &:hover .button-like, &:hover .button-more{
+          opacity: 0.7;
+        }
+      }
+    }
+    &__button-more{
+      button{
+        background: none;
+        border: none;
+        color: hsla(0, 0%, 100%, .7);
+        padding: 16px;
+        font-weight: 700;
+        font-size: 0.875rem;
+        cursor: pointer;
+        &:hover{
+          color: hsla(0, 0%, 100%, 1);
+        }
       }
     }
   }
+}
+.full-width__popular-songs{
+  height: 560px;
 }
 </style>
