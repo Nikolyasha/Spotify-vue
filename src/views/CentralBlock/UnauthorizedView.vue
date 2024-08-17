@@ -7,8 +7,8 @@ import {useArtistsStore} from "@/stores/artists";
 
 const mixesBank = useMixesStore()
 const artistsBank = useArtistsStore()
-const welcomeMixes = mixesBank.recommended.slice(0,6)
-const yourTopMixes = mixesBank.recommended.slice(0,6)
+const welcomeMixes = mixesBank.recommended.slice(0,7)
+const yourTopMixes = mixesBank.recommended.slice(0,7)
 const popularArtists = artistsBank.artists.slice(0,6)
 const mixesBlocks = ref([
   { title: 'Your top mixes' , mixes: yourTopMixes },

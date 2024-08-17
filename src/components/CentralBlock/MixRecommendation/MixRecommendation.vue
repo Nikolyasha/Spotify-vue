@@ -30,8 +30,7 @@ const props = defineProps(["title", "mixes"]);
     display: grid;
     justify-content: space-between;
     justify-items: stretch;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 10px 10px;
+    grid-template-columns: repeat(7, 1fr);
   }
 }
 </style>

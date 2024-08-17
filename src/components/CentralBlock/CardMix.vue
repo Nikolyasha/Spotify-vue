@@ -11,6 +11,9 @@ const props = defineProps([
   <div :class="props.type">
     <div class="mix-card__preview">
       <img :src="props.preview" alt="">
+      <div class="mix-card__preview__button-play">
+        <img src="@/assets/images/central/artists/play.svg">
+      </div>
     </div>
     <div class="mix-card__info">
       <p class="info-title"> {{ props.title }} </p>
@@ -23,7 +26,7 @@ const props = defineProps([
 .vertical{
   cursor: pointer;
   //background-color: rgba( 255, 255, 255, 0.04 );
-  padding: 10px 10px 18px 10px;
+  padding: 12px;
   border-radius: var(--border-radius-card);
   transition: background-color 0.2s ease-in-out;
   .mix-card__preview{
@@ -32,17 +35,38 @@ const props = defineProps([
     overflow: hidden;
     width: 100%;
     height: auto;
+    position: relative;
     img{
       width: 100%;
       height: auto;
     }
+    &__button-play{
+      transform: translateY(25px);
+      opacity: 0;
+      position: absolute;
+      width: 50px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background-color: var(--main-color);
+      right: 8px;
+      bottom: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: all 0.2s ease-in-out;
+      img{
+        width: 45%;
+        aspect-ratio: 1;
+        transform: translateX(10%);
+      }
+    }
   }
   .mix-card__info{
-    margin-top: 25px;
+    margin-top: 8px;
     .info-title{
       width: 140px;
       font-weight: 700;
-      font-size: 20px;
+      font-size: 1rem;
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
@@ -50,9 +74,8 @@ const props = defineProps([
     }
     .info-artists{
       margin-top: 8px;
-      font-size: 18px;
+      font-size: 0.875rem;
       color: #B3B3B3;
-      height: 46px;
       width: 100%;
       display: -webkit-box;
       -webkit-line-clamp: 2;
@@ -62,6 +85,11 @@ const props = defineProps([
   }
   &:hover{
     background-color: var(--color-card-hover);
+  }
+  &:hover .mix-card__preview__button-play{
+    opacity: 1;
+    transform: translateY(0);
+    box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.45);
   }
 }
 .horizontal{
