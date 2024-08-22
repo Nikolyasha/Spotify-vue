@@ -29,7 +29,7 @@ const router = createRouter({
                   props: true
                 },
                 {
-                  path: 'artist',
+                  path: 'artist/:id',
                   component: ArtistView
                 }
               ]

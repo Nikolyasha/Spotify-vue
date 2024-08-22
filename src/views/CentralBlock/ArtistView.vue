@@ -5,8 +5,10 @@ import Button from "@/components/Tools/Button.vue";
 import MixRecommendation from "@/components/CentralBlock/MixRecommendation/MixRecommendation.vue";
 import {useMixesStore} from "@/stores/mixes";
 import {useArtistsStore} from "@/stores/artists";
+import {useRoute} from "vue-router";
+
 const mixesBank = useMixesStore()
-const artistsBank = useArtistsStore()
+const artistBank = useArtistsStore()
 const yourTopMixes = mixesBank.recommended.slice(0,7)
 const mixesBlocks = ref([
   { title: 'Popular releases' , mixes: yourTopMixes },
@@ -19,8 +21,11 @@ const mixesBlocks = ref([
 const emit = defineEmits<{
   (e: 'is-transparent-header', value: boolean): void;
 }>();
+const route = useRoute()
+
 onMounted(() => {
   emit('is-transparent-header',true)
+  artistBank.fetchArtistById( route.params.id )
 })
 const popularSongs = ref()
 const showMoreSongs = () => {
@@ -50,7 +55,7 @@ const showMoreSongs = () => {
           <p>Verified Artist</p>
         </span>
         <h1 class="block-artist__header-content__artist">
-          Depeche Mode
+          {{ artistBank.artist?.artistName }}
         </h1>
         <span class="block-artist__header-content__listeners">
           <span>16,175,375</span><span> monthly listeners</span>

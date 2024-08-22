@@ -1,22 +1,36 @@
 import { defineStore } from 'pinia'
 import {ref} from "vue";
+import axios, {Axios} from "axios";
+import type {RouteParamValue} from "vue-router";
 
 interface IArtist {
     id: number,
-    nickname: string,
-    avatar: string,
+    artistName: string,
+    artistDescription: string,
+    artistPhoto: string,
 }
 
 export const useArtistsStore = defineStore('artists', ()=>{
-    const artists  = ref(<IArtist[]>[
-        { id: 0, nickname: "Depeche Mode", avatar: "/src/assets/images/central/artists/Depeche_Mode.jpeg" },
-        { id: 1, nickname: "Metallica", avatar: "/src/assets/images/central/artists/Metallica.jpeg" },
-        { id: 2, nickname: "The Police", avatar: "/src/assets/images/central/artists/The_police.jpeg" },
-        { id: 3, nickname: "R.E.M.", avatar: "/src/assets/images/central/artists/R.E.M.jpeg" },
-        { id: 4, nickname: "AC/DC", avatar: "/src/assets/images/central/artists/AC_DC.jpeg" },
-        { id: 5, nickname: "Bon Jovi", avatar: "/src/assets/images/central/artists/Bon_Jovi.jpeg" },
-        { id: 6, nickname: "Rammstein", avatar: "/src/assets/images/central/artists/Rammstein.jpeg" },
-    ])
+    const artists  = ref<IArtist[]>([])
+    const artist  = ref<IArtist>()
+    const error = ref <string | null>(null)
 
-    return { artists }
+    async function fetchArtists(){
+        try{
+            const response = await axios.get('https://localhost:7017/api/Artist')
+            artists.value = response.data
+        } catch (err) {
+            error.value = 'failed to fetch artists'
+        }
+    }
+    async function fetchArtistById(id: string | string[]){
+        try{
+            const response = await axios.get('https://localhost:7017/api/Artist/'+id)
+            artist.value = response.data
+        } catch (err) {
+            error.value = 'failed to fetch artists'
+        }
+    }
+
+    return { artists , artist , error , fetchArtists , fetchArtistById }
 })

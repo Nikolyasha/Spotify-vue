@@ -1,19 +1,21 @@
 <script setup lang="ts">
-const props = defineProps([ "nickname" , "avatar" ])
+const props = defineProps([ "nickname" , "avatar" , "id" ])
 </script>
 <template>
-<div class="artist">
-  <div class="artist-avatar">
-    <div class="artist-avatar__button-play">
-      <img src="@/assets/images/central/artists/play.svg">
+  <router-link :to="'artist/'+props.id" class="non-style">
+    <div class="artist">
+      <div class="artist-avatar">
+        <div class="artist-avatar__button-play">
+          <img src="@/assets/images/central/artists/play.svg">
+        </div>
+        <div class="artist-avatar__image">
+          <img :src="props.avatar" alt="">
+        </div>
+      </div>
+      <p class="artist-nickname">{{ props.nickname }}</p>
+      <p class="artist-status">Artist</p>
     </div>
-    <div class="artist-avatar__image">
-      <img :src="props.avatar" alt="">
-    </div>
-  </div>
-  <p class="artist-nickname">{{ props.nickname }}</p>
-  <p class="artist-status">Artist</p>
-</div>
+  </router-link>
 </template>
 <style lang="scss" scoped>
 .artist{
@@ -76,5 +78,9 @@ const props = defineProps([ "nickname" , "avatar" ])
     transform: translateY(0);
     box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.45);
   }
+}
+.non-style{
+  color: white;
+  text-decoration: none;
 }
 </style>

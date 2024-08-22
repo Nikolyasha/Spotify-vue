@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import MixRecommendation from "@/components/CentralBlock/MixRecommendation/MixRecommendation.vue";
 import Artist from "@/components/CentralBlock/Artist.vue";
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import {useMixesStore} from "@/stores/mixes";
 import {useArtistsStore} from "@/stores/artists";
 
@@ -9,7 +9,6 @@ const mixesBank = useMixesStore()
 const artistsBank = useArtistsStore()
 const welcomeMixes = mixesBank.recommended.slice(0,7)
 const yourTopMixes = mixesBank.recommended.slice(0,7)
-const popularArtists = artistsBank.artists.slice(0,6)
 const mixesBlocks = ref([
   { title: 'Your top mixes' , mixes: yourTopMixes },
   { title: 'Made for you' , mixes: yourTopMixes },
@@ -19,6 +18,10 @@ const mixesBlocks = ref([
   { title: 'Just the hits' , mixes: yourTopMixes },
 ])
 
+onMounted(() => {
+  artistsBank.fetchArtists()
+})
+
 </script>
 <template>
   <div class="main-content">
@@ -26,10 +29,11 @@ const mixesBlocks = ref([
       <div class="popular-artists">
         <h4 class="popular-artists__title">Popular artists</h4>
         <div class="popular-artists__content">
-          <artist v-for="(artist,index) in popularArtists"
+          <artist v-for="(artist,index) in artistsBank.artists.slice(0,6)"
                   :key="index"
-                  :nickname="artist.nickname"
-                  :avatar="artist.avatar" style="width: 16.66%">
+                  :nickname="artist.artistName"
+                  :id="artist.id"
+                  :avatar="artist.artistPhoto" style="width: 16.66%">
           </artist>
         </div>
       </div>
