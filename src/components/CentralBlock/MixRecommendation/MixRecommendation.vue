@@ -12,7 +12,9 @@ const props = defineProps(["title", "mixes"]);
         <CardMix
             :title = "mix.title"
             :artists = "mix.artists"
-            :preview = "mix.preview"
+            :preview = "mix.releasePreview"
+            :data = "mix.releaseDate"
+            :type-release = "mix.releaseType"
             :type="'vertical'"></CardMix>
       </div>
     </div>

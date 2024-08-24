@@ -3,7 +3,9 @@ const props = defineProps([
   'title',
   'artists',
   'preview',
-  'type'
+  'type',
+  'data',
+  'typeRelease'
 ])
 </script>
 
@@ -18,6 +20,11 @@ const props = defineProps([
     <div class="mix-card__info">
       <p class="info-title"> {{ props.title }} </p>
       <p class="info-artists" v-if="props.artists"> {{ props.artists }} </p>
+      <p class="info-date" v-if="props.data">
+        <span class="info-date__text">{{ props.data.split("-")[0] }}</span>
+        <span class="info-date__circle"> ● </span>
+        <span class="info-date__type">{{ props.typeRelease }} </span>
+      </p>
     </div>
   </div>
 </template>
@@ -28,6 +35,7 @@ const props = defineProps([
   //background-color: rgba( 255, 255, 255, 0.04 );
   padding: 12px;
   border-radius: var(--border-radius-card);
+  height: 100%;
   transition: background-color 0.2s ease-in-out;
   .mix-card__preview{
     border-radius: 4px;
@@ -69,8 +77,11 @@ const props = defineProps([
       font-size: 1rem;
       white-space: nowrap;
       text-overflow: ellipsis;
-      overflow: hidden;
       //border: 1px solid red;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
     .info-artists{
       margin-top: 8px;
@@ -81,6 +92,24 @@ const props = defineProps([
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
+    }
+    .info-date{
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 4px;
+      font-size: 1rem;
+      color: #B3B3B3;
+      &__text{}
+      &__circle{
+        font-size: 5px;
+      }
+      &__type{
+        text-transform: lowercase;
+        &:first-letter{
+          text-transform: uppercase;
+        }
+      }
     }
   }
   &:hover{

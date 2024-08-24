@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia'
 import {ref} from "vue";
 import axios, {Axios} from "axios";
-import type {RouteParamValue} from "vue-router";
 
 interface IArtist {
     id: number,

@@ -6,27 +6,30 @@ import MixRecommendation from "@/components/CentralBlock/MixRecommendation/MixRe
 import {useMixesStore} from "@/stores/mixes";
 import {useArtistsStore} from "@/stores/artists";
 import {useRoute} from "vue-router";
+import {useReleasesStore} from "@/stores/releases";
 
-const mixesBank = useMixesStore()
-const artistBank = useArtistsStore()
-const yourTopMixes = mixesBank.recommended.slice(0,7)
-const mixesBlocks = ref([
-  { title: 'Popular releases' , mixes: yourTopMixes },
-  { title: 'Albums' , mixes: yourTopMixes },
-  { title: 'Singles and EPs' , mixes: yourTopMixes },
-  { title: 'Featuring' , mixes: yourTopMixes },
-  { title: 'Appears on' , mixes: yourTopMixes },
-  { title: 'Discovered on' , mixes: yourTopMixes },
-])
-const emit = defineEmits<{
-  (e: 'is-transparent-header', value: boolean): void;
-}>();
 const route = useRoute()
+const artistBank = useArtistsStore()
+const releaseBank = useReleasesStore()
 
 onMounted(() => {
   emit('is-transparent-header',true)
   artistBank.fetchArtistById( route.params.id )
+  releaseBank.fetchReleasesByArtist( route.params.id )
 })
+const mixesBlocks = ref([
+  { title: 'Popular releases' },
+  { title: 'Albums' },
+  { title: 'Singles and EPs' },
+  { title: 'Featuring' },
+  { title: 'Appears on' },
+  { title: 'Discovered on' },
+])
+console.log(mixesBlocks)
+const emit = defineEmits<{
+  (e: 'is-transparent-header', value: boolean): void;
+}>();
+
 const popularSongs = ref()
 const showMoreSongs = () => {
   popularSongs.value.classList.toggle('full-width__popular-songs')
@@ -116,10 +119,11 @@ const showMoreSongs = () => {
       </div>
     </div>
     <div class="block-artist__albums">
+      <img src="../../src/assets/images/artists/depeche_mode/releases/Violator.jpg" alt="">
       <div class="your-top-mixes recommendation-mixes"
            v-for = "(mixes,index) in mixesBlocks "
            :key = "index">
-        <MixRecommendation :title="mixes.title" :mixes="yourTopMixes"></MixRecommendation>
+        <MixRecommendation :title="mixes.title" :mixes="releaseBank.releases.slice(0,7)"></MixRecommendation>
         </div>
     </div>
   </div>
