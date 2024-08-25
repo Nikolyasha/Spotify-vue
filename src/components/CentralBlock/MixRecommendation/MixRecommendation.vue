@@ -5,7 +5,7 @@ const props = defineProps(["title", "mixes"]);
 </script>
 
 <template>
-  <div class="mix-recommendation">
+  <div class="mix-recommendation" v-if="props.mixes.length > 0">
     <h4> {{ props.title }} </h4>
     <div class="mixes">
       <div class="mixes-item" v-for="(mix,index) in  props.mixes">
@@ -15,6 +15,7 @@ const props = defineProps(["title", "mixes"]);
             :preview = "mix.releasePreview"
             :data = "mix.releaseDate"
             :type-release = "mix.releaseType"
+            :id-release = "mix.id"
             :type="'vertical'"></CardMix>
       </div>
     </div>

@@ -6,25 +6,26 @@ interface ISong {
     id: number,
     title: string,
     duration: string,
-    releaseDate: string,
-    releasePreview: string,
-    artistId: number,
-    songs: string[],
+    trackNumber: number,
+    lyrics: string,
+    releaseId: number,
+    listeners: bigint,
+    artists : string[]
 }
 
-export const useReleasesStore = defineStore('releases', ()=>{
-    const releases  = ref<IRelease[]>([])
-    const release  = ref<IRelease>()
+export const useSongsStore = defineStore('songs', ()=>{
+    const songs  = ref<ISong[]>([])
+    const song  = ref<ISong>()
     const error = ref <string | null>(null)
 
-    async function fetchReleasesByArtist(idArtist: string | string[]){
+    async function fetchSongsByRelease(idRelease: string | string[]){
         try{
-            const response = await axios.get('https://localhost:7017/api/Release/'+idArtist)
-            releases.value = response.data
+            const response = await axios.get('https://localhost:7017/api/Song/'+idRelease)
+            songs.value = response.data
         } catch (err) {
-            error.value = 'failed to fetch artists'
+            error.value = 'failed to fetch songs'
         }
     }
 
-    return { releases , release , error , fetchReleasesByArtist }
+    return { songs , song , error , fetchSongsByRelease }
 })

@@ -7,6 +7,8 @@ import {useMixesStore} from "@/stores/mixes";
 import {useArtistsStore} from "@/stores/artists";
 import {useRoute} from "vue-router";
 import {useReleasesStore} from "@/stores/releases";
+import Footer from "@/components/CentralBlock/Footer.vue";
+import LinearBackground from "@/components/CentralBlock/LinearBackground.vue";
 
 const route = useRoute()
 const artistBank = useArtistsStore()
@@ -65,6 +67,7 @@ const showMoreSongs = () => {
         </span>
       </div>
     </div>
+    <LinearBackground is-release="true" color="rgb(100, 100, 100)"></LinearBackground>
     <div class="block-artist__follow">
       <div class="block-artist__follow-button-play">
         <div>
@@ -126,6 +129,9 @@ const showMoreSongs = () => {
         <MixRecommendation :title="mixes.title" :mixes="releaseBank.releases.slice(0,7)"></MixRecommendation>
         </div>
     </div>
+    <div class="block-artist__footer">
+      <Footer></Footer>
+    </div>
   </div>
 </template>
 <style lang="scss" scoped>
@@ -184,6 +190,8 @@ const showMoreSongs = () => {
     padding: 24px;
     display: flex;
     align-items: center;
+    position: relative;
+    z-index: 2;
     &-button-play{
       border-radius: 9999px;
       background-color: var(--main-color);
@@ -242,6 +250,8 @@ const showMoreSongs = () => {
   &__popular-songs{
     margin-top: 12px;
     padding: 0 24px;
+    position: relative;
+    z-index: 2;
     &__title{
       font-weight: 700;
       font-size: 1.5rem;
@@ -400,6 +410,9 @@ const showMoreSongs = () => {
     display: flex;
     flex-direction: column;
     gap: 40px;
+  }
+  &__footer{
+    margin-top: 40px;
   }
 }
 .full-width__popular-songs{

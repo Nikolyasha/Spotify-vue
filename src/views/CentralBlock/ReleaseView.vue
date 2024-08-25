@@ -1,92 +1,120 @@
 <script lang="ts" setup>
 import Button from "@/components/Tools/Button.vue";
+import {useSongsStore} from "@/stores/songs";
+import {onMounted} from "vue";
+import {useRoute} from "vue-router";
+import {useReleasesStore} from "@/stores/releases";
+import Footer from "@/components/CentralBlock/Footer.vue";
+import LinearBackground from "@/components/CentralBlock/LinearBackground.vue";
+
+const bankSongs = useSongsStore()
+const bankRelease = useReleasesStore()
+
+const route = useRoute()
+onMounted(()=>{
+  bankSongs.fetchSongsByRelease( route.params.id )
+  bankRelease.fetchReleaseById( route.params.id )
+})
 </script>
 <template>
-  <section class="header-release">
-  <div class="header-release__content">
-    <div class="header-release__content-preview">
-      <img src="@/assets/images/artists/depeche_mode/releases/Violator.jpg" alt="">
-    </div>
-    <div class="header-release__content-info">
-      <p class="header-release__content-info__type">Single</p>
-      <h4 class="header-release__content-info__name">Violator</h4>
-      <div class="header-release__content-info_artist">
-        <div class="header-release__content-info_artist-photo">
-          <img src="@/assets/images/central/artists/Depeche_Mode.jpeg" alt="">
+  <div class="release-block">
+    <section class="header-release">
+      <div class="header-release__content">
+        <div class="header-release__content-preview">
+          <img :src="bankRelease.release?.releasePreview" alt="">
         </div>
-        <span class="header-release__content-info_artist-name">Depeche Mode</span>
-        <span class="header-release__content-info_artist-date">2022</span>
-        <span class="header-release__content-info_artist-songs">29 songs, 2 hr 59 min</span>
+        <div class="header-release__content-info">
+          <p class="header-release__content-info__type"> {{ bankRelease.release?.releaseType }} </p>
+          <h4 class="header-release__content-info__name">{{ bankRelease.release?.title }}</h4>
+          <div class="header-release__content-info_artist">
+            <div class="header-release__content-info_artist-photo">
+              <img src="@/assets/images/central/artists/Depeche_Mode.jpeg" alt="">
+            </div>
+            <span class="header-release__content-info_artist-name">Depeche Mode</span>
+            <span class="header-release__content-info_artist-date">2022</span>
+            <span class="header-release__content-info_artist-songs">29 songs, 2 hr 59 min</span>
+          </div>
+        </div>
       </div>
+    </section>
+    <LinearBackground is-release="true" color="rgb(168, 24, 40)"></LinearBackground>
+    <section class="menu-play">
+      <div class="menu-play__content">
+        <div class="menu-play__content__buttons">
+          <div class="menu-play__content__buttons__button-play">
+            <div>
+              <img src="@/assets/images/central/artists/play.svg">
+            </div>
+          </div>
+          <div class="menu-play__content__buttons__button-like">
+            <svg data-encore-id="icon" role="img" aria-hidden="true" viewBox="0 0 24 24" class="Svg-sc-ytk21e-0 cqasRA"><path d="M5.21 1.57a6.757 6.757 0 0 1 6.708 1.545.124.124 0 0 0 .165 0 6.741 6.741 0 0 1 5.715-1.78l.004.001a6.802 6.802 0 0 1 5.571 5.376v.003a6.689 6.689 0 0 1-1.49 5.655l-7.954 9.48a2.518 2.518 0 0 1-3.857 0L2.12 12.37A6.683 6.683 0 0 1 .627 6.714 6.757 6.757 0 0 1 5.21 1.57zm3.12 1.803a4.757 4.757 0 0 0-5.74 3.725l-.001.002a4.684 4.684 0 0 0 1.049 3.969l.009.01 7.958 9.485a.518.518 0 0 0 .79 0l7.968-9.495a4.688 4.688 0 0 0 1.049-3.965 4.803 4.803 0 0 0-3.931-3.794 4.74 4.74 0 0 0-4.023 1.256l-.008.008a2.123 2.123 0 0 1-2.9 0l-.007-.007a4.757 4.757 0 0 0-2.214-1.194z"></path></svg>
+          </div>
+          <div class="menu-play__content__buttons__button-more">
+            <svg data-encore-id="icon" role="img" aria-hidden="true" viewBox="0 0 24 24" class="Svg-sc-ytk21e-0 cqasRA"><path d="M4.5 13.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm15 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm-7.5 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path></svg>
+          </div>
+        </div>
+        <div class="menu-play__content__button-list">
+          <span>List</span>
+          <svg data-encore-id="icon" role="img" aria-hidden="true" viewBox="0 0 16 16" class="Svg-sc-ytk21e-0 cAMMLk"><path d="M15 14.5H5V13h10v1.5zm0-5.75H5v-1.5h10v1.5zM15 3H5V1.5h10V3zM3 3H1V1.5h2V3zm0 11.5H1V13h2v1.5zm0-5.75H1v-1.5h2v1.5z"></path></svg>
+        </div>
+      </div>
+    </section>
+    <section class="list-songs">
+      <div class="list-songs__header">
+        <div class="list-songs__header-wrapper">
+          <span class="list-songs__header-wrapper__number">#</span>
+          <span class="list-songs__header-wrapper__title">Title</span>
+          <div class="list-songs__header-wrapper__time">
+            <svg data-encore-id="icon" role="img" aria-hidden="true" viewBox="0 0 16 16" class="Svg-sc-ytk21e-0 dYnaPI"><path d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"></path><path d="M8 3.25a.75.75 0 0 1 .75.75v3.25H11a.75.75 0 0 1 0 1.5H7.25V4A.75.75 0 0 1 8 3.25z"></path></svg>
+          </div>
+        </div>
+      </div>
+      <div class="list-songs__content">
+      </div>
+      <div>
+      </div>
+      <div class="list-songs__content">
+        <div class="list-songs__content__list" ref="popularSongs">
+          <div v-for="(song,index) in bankSongs.songs" key="index" class="list-songs__content__list-item">
+            <div class="list-songs__content__list-item__number">
+              <p>{{ index + 1 }}</p>
+              <button>
+                <svg data-encore-id="icon" role="img" aria-hidden="true" class="Svg-sc-ytk21e-0 bneLcE zOsKPnD_9x3KJqQCSmAq" viewBox="0 0 24 24"><path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path></svg>
+              </button>
+            </div>
+            <div class="list-songs__content__list-item__song">
+              <p>{{ song.title }}</p>
+              <div v-for="(artist,index) in song.artists" :key="index">
+                <span> {{ artist }} </span>
+              </div>
+            </div>
+            <div class="list-songs__content__list-item__listens">
+              <p> {{ song.listeners.toLocaleString('en-US') }} </p>
+            </div>
+            <div class="list-songs__content__list-item__time">
+              <button class="button-like">
+                <svg data-encore-id="icon" role="img" aria-hidden="true" viewBox="0 0 16 16" class="Svg-sc-ytk21e-0 dYnaPI"><path d="M1.69 2A4.582 4.582 0 0 1 8 2.023 4.583 4.583 0 0 1 11.88.817h.002a4.618 4.618 0 0 1 3.782 3.65v.003a4.543 4.543 0 0 1-1.011 3.84L9.35 14.629a1.765 1.765 0 0 1-2.093.464 1.762 1.762 0 0 1-.605-.463L1.348 8.309A4.582 4.582 0 0 1 1.689 2zm3.158.252A3.082 3.082 0 0 0 2.49 7.337l.005.005L7.8 13.664a.264.264 0 0 0 .311.069.262.262 0 0 0 .09-.069l5.312-6.33a3.043 3.043 0 0 0 .68-2.573 3.118 3.118 0 0 0-2.551-2.463 3.079 3.079 0 0 0-2.612.816l-.007.007a1.501 1.501 0 0 1-2.045 0l-.009-.008a3.082 3.082 0 0 0-2.121-.861z"></path></svg>
+              </button>
+              <p> {{ song.duration.split(':').slice(0, 2).join(':') }} </p>
+              <button class="button-more">
+                <span></span>
+                <span></span>
+                <span></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="footer">
+      <Footer></Footer>
     </div>
   </div>
-</section>
-  <section class="menu-play">
-    <div class="menu-play__content">
-      <div class="menu-play__content__buttons">
-        <div class="menu-play__content__buttons__button-play">
-          <div>
-            <img src="@/assets/images/central/artists/play.svg">
-          </div>
-        </div>
-        <div class="menu-play__content__buttons__button-like">
-          <svg data-encore-id="icon" role="img" aria-hidden="true" viewBox="0 0 24 24" class="Svg-sc-ytk21e-0 cqasRA"><path d="M5.21 1.57a6.757 6.757 0 0 1 6.708 1.545.124.124 0 0 0 .165 0 6.741 6.741 0 0 1 5.715-1.78l.004.001a6.802 6.802 0 0 1 5.571 5.376v.003a6.689 6.689 0 0 1-1.49 5.655l-7.954 9.48a2.518 2.518 0 0 1-3.857 0L2.12 12.37A6.683 6.683 0 0 1 .627 6.714 6.757 6.757 0 0 1 5.21 1.57zm3.12 1.803a4.757 4.757 0 0 0-5.74 3.725l-.001.002a4.684 4.684 0 0 0 1.049 3.969l.009.01 7.958 9.485a.518.518 0 0 0 .79 0l7.968-9.495a4.688 4.688 0 0 0 1.049-3.965 4.803 4.803 0 0 0-3.931-3.794 4.74 4.74 0 0 0-4.023 1.256l-.008.008a2.123 2.123 0 0 1-2.9 0l-.007-.007a4.757 4.757 0 0 0-2.214-1.194z"></path></svg>
-        </div>
-        <div class="menu-play__content__buttons__button-more">
-          <svg data-encore-id="icon" role="img" aria-hidden="true" viewBox="0 0 24 24" class="Svg-sc-ytk21e-0 cqasRA"><path d="M4.5 13.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm15 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm-7.5 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path></svg>
-        </div>
-      </div>
-      <div class="menu-play__content__button-list">
-        <span>List</span>
-        <svg data-encore-id="icon" role="img" aria-hidden="true" viewBox="0 0 16 16" class="Svg-sc-ytk21e-0 cAMMLk"><path d="M15 14.5H5V13h10v1.5zm0-5.75H5v-1.5h10v1.5zM15 3H5V1.5h10V3zM3 3H1V1.5h2V3zm0 11.5H1V13h2v1.5zm0-5.75H1v-1.5h2v1.5z"></path></svg>
-      </div>
-    </div>
-  </section>
-  <section class="list-songs">
-    <div class="list-songs__header">
-      <div class="list-songs__header-wrapper">
-        <span class="list-songs__header-wrapper__number">#</span>
-        <span class="list-songs__header-wrapper__title">Title</span>
-        <div class="list-songs__header-wrapper__time">
-          <svg data-encore-id="icon" role="img" aria-hidden="true" viewBox="0 0 16 16" class="Svg-sc-ytk21e-0 dYnaPI"><path d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"></path><path d="M8 3.25a.75.75 0 0 1 .75.75v3.25H11a.75.75 0 0 1 0 1.5H7.25V4A.75.75 0 0 1 8 3.25z"></path></svg>
-        </div>
-      </div>
-    </div>
-    <div class="list-songs__content">
-    </div>
-    <div class="list-songs__content">
-      <div class="list-songs__content__list" ref="popularSongs">
-        <div v-for="(block,index) in 10" key="index" class="list-songs__content__list-item">
-          <div class="list-songs__content__list-item__number">
-            <p>{{ index + 1 }}</p>
-            <button>
-              <svg data-encore-id="icon" role="img" aria-hidden="true" class="Svg-sc-ytk21e-0 bneLcE zOsKPnD_9x3KJqQCSmAq" viewBox="0 0 24 24"><path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path></svg>
-            </button>
-          </div>
-          <div class="list-songs__content__list-item__song">
-            <div class="wrapper-image"><img src="@/assets/images/central/mixes/Daily-mix-1.png" alt=""></div>
-            <p>Enjoy the Silence</p>
-          </div>
-          <div class="list-songs__content__list-item__listens">
-            <p> 687,296,370 </p>
-          </div>
-          <div class="list-songs__content__list-item__time">
-            <button class="button-like">
-              <svg data-encore-id="icon" role="img" aria-hidden="true" viewBox="0 0 16 16" class="Svg-sc-ytk21e-0 dYnaPI"><path d="M1.69 2A4.582 4.582 0 0 1 8 2.023 4.583 4.583 0 0 1 11.88.817h.002a4.618 4.618 0 0 1 3.782 3.65v.003a4.543 4.543 0 0 1-1.011 3.84L9.35 14.629a1.765 1.765 0 0 1-2.093.464 1.762 1.762 0 0 1-.605-.463L1.348 8.309A4.582 4.582 0 0 1 1.689 2zm3.158.252A3.082 3.082 0 0 0 2.49 7.337l.005.005L7.8 13.664a.264.264 0 0 0 .311.069.262.262 0 0 0 .09-.069l5.312-6.33a3.043 3.043 0 0 0 .68-2.573 3.118 3.118 0 0 0-2.551-2.463 3.079 3.079 0 0 0-2.612.816l-.007.007a1.501 1.501 0 0 1-2.045 0l-.009-.008a3.082 3.082 0 0 0-2.121-.861z"></path></svg>
-            </button>
-            <p>4:14</p>
-            <button class="button-more">
-              <span></span>
-              <span></span>
-              <span></span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 </template>
 <style lang="scss" scoped>
+.release-block{
+  position: relative;
+}
 .header-release{
   width: 100%;
   height: 30vh;
@@ -154,6 +182,7 @@ import Button from "@/components/Tools/Button.vue";
 }
 .menu-play{
   position: relative;
+  z-index: 2;
   &__content{
     padding: 24px;
     display: flex;
@@ -234,6 +263,7 @@ import Button from "@/components/Tools/Button.vue";
 }
 .list-songs{
   position: relative;
+  z-index: 2;
   &__header{
     margin: 0 24px 15px 24px;
     &-wrapper{
@@ -313,11 +343,23 @@ import Button from "@/components/Tools/Button.vue";
         &__song{
           height: 100%;
           display: flex;
-          align-items: center;
+          flex-direction: column;
+          justify-content: center;
           user-select: none;
           p{
             cursor: pointer;
             &:hover{
+              text-decoration: underline;
+            }
+          }
+          span{
+            opacity: 0.7;
+            font-weight: 200;
+            font-size: 0.875rem;
+            transition: opacity 0.2s ease-in-out;
+            &:hover{
+              cursor: pointer;
+              opacity: 1;
               text-decoration: underline;
             }
           }
@@ -417,5 +459,8 @@ import Button from "@/components/Tools/Button.vue";
       }
     }
   }
+}
+.footer{
+  margin-top: 40px;
 }
 </style>

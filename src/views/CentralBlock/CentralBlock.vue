@@ -8,10 +8,12 @@ import {onUpdated, ref} from "vue";
 import Button from "@/components/Tools/Button.vue";
 import {useArtistsStore} from "@/stores/artists";
 import Artist from "@/components/CentralBlock/Artist.vue";
+import {useRouter} from "vue-router";
 const isAuth = ref<boolean>(false)
 const isTransparentHeader = ref<boolean>(false)
 const header = ref()
 const content = ref()
+const router = useRouter()
 
 function isScroll(){
   if (content.value.scrollTop >= 96) {
@@ -28,17 +30,20 @@ function isTrans(value:boolean){
   isTransparentHeader.value = value
   isTransparentHeader.value == value ? header.value.style.background="transparent" : ''
 }
-
+function goBack(){
+  router.go(-1)
+}
+function goNext(){
+  router.go(1)
+}
 </script>
 
 <template>
   <div class="central-block">
-    <div class="linear" v-if="isAuth"></div>
-    <div class="linear-gray" v-if="!isAuth"></div>
     <div class="header" ref="header" >
       <div class="buttons">
-        <ButtonArrow :orientation="'left'"></ButtonArrow>
-        <ButtonArrow :orientation="'right'" style="margin-left: 10px"></ButtonArrow>
+        <ButtonArrow :orientation="'left'" @on-click-arrow="goBack"></ButtonArrow>
+        <ButtonArrow :orientation="'right'" style="margin-left: 10px" @on-click-arrow="goNext"></ButtonArrow>
       </div>
       <div class="profile" v-if="isAuth">
         <Profile :nickname="'Nikolyasha'"></Profile>
@@ -62,22 +67,6 @@ function isTrans(value:boolean){
   height: 100%;
   //scroll-behavior: smooth;
   position: relative;
-  .linear{
-    top: 0;
-    z-index: 0;
-    position: absolute;
-    width: 100%;
-    height: 600px;
-    background: linear-gradient(#3333A3, #121212);
-  }
-  .linear-gray{
-    top: 0;
-    z-index: 0;
-    position: absolute;
-    width: 100%;
-    height: 300px;
-    background: linear-gradient(#282828, #121212);
-  }
   .header{
     height: 65px;
     top: 0;

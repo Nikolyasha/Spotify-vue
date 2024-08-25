@@ -5,31 +5,35 @@ const props = defineProps([
   'preview',
   'type',
   'data',
-  'typeRelease'
+  'typeRelease',
+  'idRelease'
 ])
 </script>
 
 <template>
-  <div :class="props.type">
-    <div class="mix-card__preview">
-      <img :src="props.preview" alt="">
-      <div class="mix-card__preview__button-play">
-        <img src="@/assets/images/central/artists/play.svg">
+  <router-link :to="'/release/' + props.idRelease ">
+    <div :class="props.type">
+      <div class="mix-card__preview">
+        <img :src="props.preview" alt="">
+        <div class="mix-card__preview__button-play">
+          <img src="@/assets/images/central/artists/play.svg">
+        </div>
+      </div>
+      <div class="mix-card__info">
+        <p class="info-title"> {{ props.title }} </p>
+        <p class="info-artists" v-if="props.artists"> {{ props.artists }} </p>
+        <p class="info-date" v-if="props.data">
+          <span class="info-date__text">{{ props.data.split("-")[0] }}</span>
+          <span class="info-date__circle"> ● </span>
+          <span class="info-date__type">{{ props.typeRelease }} </span>
+        </p>
       </div>
     </div>
-    <div class="mix-card__info">
-      <p class="info-title"> {{ props.title }} </p>
-      <p class="info-artists" v-if="props.artists"> {{ props.artists }} </p>
-      <p class="info-date" v-if="props.data">
-        <span class="info-date__text">{{ props.data.split("-")[0] }}</span>
-        <span class="info-date__circle"> ● </span>
-        <span class="info-date__type">{{ props.typeRelease }} </span>
-      </p>
-    </div>
-  </div>
+  </router-link>
 </template>
 
 <style scoped lang="scss">
+
 .vertical{
   cursor: pointer;
   //background-color: rgba( 255, 255, 255, 0.04 );

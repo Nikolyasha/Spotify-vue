@@ -19,12 +19,20 @@ export const useReleasesStore = defineStore('releases', ()=>{
 
     async function fetchReleasesByArtist(idArtist: string | string[]){
         try{
-            const response = await axios.get('https://localhost:7017/api/Release/'+idArtist)
+            const response = await axios.get('https://localhost:7017/api/Release/artist/'+idArtist)
             releases.value = response.data
         } catch (err) {
             error.value = 'failed to fetch artists'
         }
     }
+    async function fetchReleaseById(idRelease: string | string[]){
+        try{
+            const response = await axios.get('https://localhost:7017/api/Release/'+idRelease)
+            release.value = response.data[0]
+        } catch (err) {
+            error.value = 'failed to fetch artists'
+        }
+    }
 
-    return { releases , release , error , fetchReleasesByArtist }
+    return { releases , release , error , fetchReleasesByArtist , fetchReleaseById }
 })
