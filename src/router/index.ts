@@ -2,12 +2,15 @@ import { createRouter, createWebHistory } from 'vue-router'
 import MainLayout from '@/layouts/MainLayout.vue'
 import WithoutLogin from '@/layouts/WithoutLogin.vue'
 import LoginView from '@/views/LoginView.vue'
-import SignUpView from '@/views/SignUpView.vue'
+import SignUpView from '@/views/SignUpView/SignUpView.vue'
 import MainView from '@/views/MainView.vue'
 import CentralBlock from "@/views/CentralBlock/CentralBlock.vue";
 import UnauthorizedView from "@/views/CentralBlock/UnauthorizedView.vue";
 import ArtistView from "@/views/CentralBlock/ArtistView.vue";
 import ReleaseView from "@/views/CentralBlock/ReleaseView.vue";
+import SignUpWelcome from "@/views/SignUpView/SignUpWelcome.vue";
+import SignUpSteps from "@/views/SignUpView/SignUpSteps.vue";
+import SignUpStepOne from "@/views/SignUpView/SignUpStepOne.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -47,7 +50,32 @@ const router = createRouter({
         },
         {
           path: '/signup',
-          component: SignUpView
+          component: SignUpView,
+          children:[
+            {
+              path: '/signup',
+              component: SignUpWelcome
+            },
+            {
+              path: '/signup/step/1',
+              component: SignUpSteps,
+              children:[
+                {
+                  path: '/signup/step/1',
+                  component: SignUpStepOne
+                },
+                {
+                  path: '/signup/step/2',
+                  component: SignUpWelcome
+                },
+                {
+                  path: '/signup/step/3',
+                  component: SignUpWelcome
+                },
+              ]
+            },
+
+          ]
         }
       ]
     }
