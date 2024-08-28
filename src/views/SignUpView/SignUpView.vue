@@ -24,8 +24,8 @@ import ButtonLogInSocial from "@/components/Tools/ButtonLogInSocial.vue";
 </template>
 <style lang="scss" scoped>
 .wrapper{
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  min-height: 100vh;
   background-color: #121212;
   header{
     padding: 32px 0 24px 0;

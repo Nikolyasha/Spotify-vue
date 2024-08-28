@@ -57,24 +57,9 @@ const router = createRouter({
               component: SignUpWelcome
             },
             {
-              path: '/signup/step/1',
+              path: '/signup/step/:id',
               component: SignUpSteps,
-              children:[
-                {
-                  path: '/signup/step/1',
-                  component: SignUpStepOne
-                },
-                {
-                  path: '/signup/step/2',
-                  component: SignUpWelcome
-                },
-                {
-                  path: '/signup/step/3',
-                  component: SignUpWelcome
-                },
-              ]
             },
-
           ]
         }
       ]
