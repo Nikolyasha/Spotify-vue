@@ -58,7 +58,12 @@ const router = createRouter({
             },
             {
               path: '/signup/step/:id',
+              name: 'StepsRegister',
               component: SignUpSteps,
+              props: route => ({
+                id:route.params.id ,
+                email :route.params.email
+              })
             },
           ]
         }

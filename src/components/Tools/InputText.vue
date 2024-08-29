@@ -25,6 +25,7 @@ const genders =ref([
   { val : 'other', gender : 'Other' },
   { val : 'nogender', gender : 'I don\'t want to answer' },
 ])
+const password = ref('')
 </script>
 <template>
   <div class="wrapper-input">
@@ -32,7 +33,7 @@ const genders =ref([
     <span v-if="props.subtitle && props.type != 'date'"> {{ props.subtitle }} </span>
     <span v-if="props.subtitle  && props.type == 'date'"> {{ props.subtitle }} <button>More</button></span>
     <div class="wrapper-input__container-input" v-if="props.type != 'date' && props.type != 'sex'">
-      <input :name="props.name" :type="props.type" :placeholder="props.placeholder">
+      <input :name="props.name" v-model="password" :type="props.type" :placeholder="props.placeholder" @change="$emit('input', password)">
     </div>
     <div class="wrapper-input__container-input input-date" v-if="props.type == 'date'">
       <input class="input-date-day" placeholder="dd" type="number" >

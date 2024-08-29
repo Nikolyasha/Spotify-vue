@@ -3,20 +3,26 @@ import InputText from "@/components/Tools/InputText.vue";
 import ButtonLogInSocial from "@/components/Tools/ButtonLogInSocial.vue";
 import Button from "@/components/Tools/Button.vue";
 import {ref} from "vue";
+import {useRouter} from "vue-router";
+const router = useRouter();
+const emailUser = ref('')
 const socialLinks = ref([
   {title: 'Google' , icon:'/src/assets/images/tools/google.ico' , text: 'Sign up with Google'},
   {title: 'Facebook' , icon:'/src/assets/images/tools/facebook.ico' , text: 'Sign up with Facebook'},
   {title: 'Apple' , icon:'/src/assets/images/tools/apple.ico' , text: 'log in with Apple'},
 ])
+function goToNextStep(){
+  router.push({ name: 'StepsRegister', params: { email: 'email@email' , id: 1 } });
+}
 </script>
 <template>
   <section>
     <div class="wrapper-sign-up">
       <h1>Sign up and get into music</h1>
       <form action="" class="form-sign-up">
-        <input-text name="email-sign-up" placeholder="name@domain.com" title="Email"></input-text>
+        <input-text name="email-sign-up" placeholder="name@domain.com" title="Email" @input="(data) => emailUser = data"></input-text>
         <div class="form-sign-up__button">
-          <Button size="large" link="/" title="Continue" color="green"></Button>
+          <Button size="large" title="Continue" color="green" @click-button="goToNextStep"></Button>
         </div>
       </form>
       <div class="block-delimiter">

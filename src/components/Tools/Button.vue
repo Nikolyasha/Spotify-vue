@@ -20,7 +20,7 @@ const fontSize = computed(() => {
 </script>
 
 <template>
-  <div :class="props.color === 'green' ? 'green-button link' : 'link' " :style="'padding:'+padding">
+  <div :class="props.color === 'green' ? 'green-button link' : 'link' " :style="'padding:'+padding" @click="$emit('clickButton')">
     <router-link :to="props.link">
       <span :style="'font-size:'+fontSize">{{props.title}}</span>
     </router-link>

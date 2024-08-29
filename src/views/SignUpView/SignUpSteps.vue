@@ -1,35 +1,67 @@
 <script lang="ts" setup>
 import Button from "@/components/Tools/Button.vue";
 import InputText from "@/components/Tools/InputText.vue";
-import {useRoute} from "vue-router";
-import {ref} from "vue";
+import {useRoute, useRouter} from "vue-router";
+import {onUpdated, ref, watch} from "vue";
 import AcceptRules from "@/components/Tools/AcceptRules.vue";
 
 const route = useRoute()
-
+const router = useRouter()
 const rules = ref(
     ['1 letter','1 digit or special character (eg # ? ! &)','10 characters']
+)
+const titleHeader = ref('')
+const widthProgressBar = ref('')
+function nextStep(){
+  const currentId = parseInt(<string>route.params.id);
+  router.push({ name: route.name, params: { id: currentId + 1 } });
+}
+function goBack(){
+  router.go(-1)
+}
+watch(
+    () => route.params.id,
+    (newId) => {
+      switch (newId) {
+        case '1':
+          titleHeader.value = 'Think of a password';
+          widthProgressBar.value = '33.333';
+          break;
+        case '2':
+          titleHeader.value = 'Tell us about yourself';
+          widthProgressBar.value = '66.666';
+          break;
+        case '3':
+          titleHeader.value = 'Terms of Use';
+          widthProgressBar.value = '100';
+          break;
+        default:
+          titleHeader.value = '';
+          break;
+      }
+    },
+    { immediate: true }
 )
 </script>
 <template>
   <div class="progress-bar">
-    <div class="progress-bar-inner"></div>
+    <div class="progress-bar-inner" :style="'width:' + widthProgressBar + '%'"></div>
   </div>
   <div class="steps-counter">
-    <button class="steps-counter__button-back">
+    <button class="steps-counter__button-back" @click="goBack">
       <span>
         <svg data-encore-id="icon" role="img" aria-hidden="true" viewBox="0 0 24 24" class="Svg-sc-ytk21e-0 dDkLMK"><path d="M15.957 2.793a1 1 0 0 1 0 1.414L8.164 12l7.793 7.793a1 1 0 1 1-1.414 1.414L5.336 12l9.207-9.207a1 1 0 0 1 1.414 0z"></path></svg>
       </span>
-    </button>
+    </button >
     <div class="steps-counter__text">
-      <p class="steps-counter__text-count">Step <span>1</span> of 3</p>
-      <p class="steps-counter__text-rule">Think of a password</p>
+      <p class="steps-counter__text-count">Step <span> {{ route.params.id }} </span> of 3</p>
+      <p class="steps-counter__text-rule">{{ titleHeader }}</p>
     </div>
   </div>
 
   <section v-if="route.params.id == '1'" class="step-1" >
     <form action="" class="form-sign-up">
-      <input-text name="email-sign-up" type="password" title="Password"></input-text>
+      <input-text name="email-sign-up" type="password" title="Password" @input="(pass) =>  User.password = pass"></input-text>
       <div class="form-sign-up__rules">
         <p>The password must contain at least:</p>
         <div class="form-sign-up__rules-item" v-for="(rule, index) in rules" :key="index">
@@ -58,12 +90,14 @@ const rules = ref(
   </section>
   <section v-if="route.params.id == '3'" class="step-3">
     <form class="step-3__form">
-      <accept-rules text="I do not want to receive promotional messages from Spotify."></accept-rules>
+      <accept-rules text="I do not want to receive promotional messages from Spotify." id-name="checkbox-marketing"></accept-rules>
+      <accept-rules text="I consent to my registration data being shared with Spotify partners for advertising purposes." id-name="checkbox-privacy"></accept-rules>
+      <accept-rules type="user-agreement" id-name="terms-conditions-checkbox"></accept-rules>
     </form>
   </section>
 
   <div class="form-sign-up__button">
-    <Button size="large" link="/" title="Continue" color="green"></Button>
+    <Button size="large" title="Continue" color="green" @clickButton="nextStep"></Button>
   </div>
 </template>
 <style lang="scss" scoped>
@@ -82,6 +116,7 @@ section{
     height: 100%;
     width: 33.333%;
     background-color: var(--main-color);
+    transition: width 0.2s ease-in-out;
   }
 }
 .steps-counter{
@@ -155,7 +190,9 @@ section{
 }
 .step-3{
   &__form{
-
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
   }
 }
 .form-sign-up__button{

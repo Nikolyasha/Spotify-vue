@@ -1,9 +1,4 @@
 <script lang="ts" setup>
-import InputText from "@/components/Tools/InputText.vue";
-import Button from "@/components/Tools/Button.vue";
-import {ref} from "vue";
-import ButtonLogInSocial from "@/components/Tools/ButtonLogInSocial.vue";
-
 
 </script>
 <template>
